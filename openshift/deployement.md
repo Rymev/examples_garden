@@ -49,7 +49,7 @@ oc secrets link default secret1 secret2 --for=pull
 **You should now be able to do your deployment**
 
 ## DEPLOY AN APPLICATION
-###Optional: add an image in OpenShift repository
+### Optional: add an image in OpenShift repository
 It can be done via ImageStream, but in a more easy way:
 ```
 oc tag --source=docker gitlab_registry/myproject/image:latest image:latest
