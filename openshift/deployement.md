@@ -132,7 +132,7 @@ objects:
 Quickly: In this example, we deploy a new service : "smashing". We associate a 'route' to it (an url). Then we define
 our deployment (which image to use, replicas etc...)
 
-###Execute a template
+### Execute a template
 ```
 oc process -f oc_template.yml  | oc apply -f -
 ```
