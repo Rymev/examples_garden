@@ -26,7 +26,6 @@ class My_suite(unittest.TestCase):
 if __name__=="__main__":
     unittest.main()
 ```
-***Note check why it's a testcase...***
 
 ## Be the master of time and space
 
@@ -83,3 +82,33 @@ def redirected_dummy():
 ```
 
 ### Mock an API
+
+I use httmock to redirect requests. It's useful to mock an API and avoid to have a running environment wirh specific
+application to run tests.
+
+```python
+from httmock import urlmatch,HTTMock
+from requests import Response # In order to create our response easily
+
+# First create the mockup
+@urlmatch(netloc=r'.*') # Regex that match with any url
+def mockup(url, request):
+
+    response = Response()
+    
+    if url.hostname == "kenobi":
+        response._content = b'Hello there'
+        response.status_code = 200
+    elif url.hostname == "Grevious":
+        response._content = b'General Kenobi'
+        response.status_code = 403
+    else:
+        response._content = b'Oups. Wrong film'
+        response.status_code = 500
+    return response
+    
+# Then apply it
+with HTTMock(mockup):
+    # each request sent in the statement will be intercepted
+    arrival_on_utapau() 
+```
